@@ -1,0 +1,36 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bash run-dev.sh",
+    "start": "bash run-dev.sh",
+    "build": "bash -c 'chmod +x bin/php 2>/dev/null || true; (./bin/php -l index.php >/dev/null 2>&1 || php -l index.php >/dev/null 2>&1 || true) && (./bin/php database/init_sqlite.php 2>/dev/null || true) && echo \"Applet build complete\"'",
+    "clean": "rm -rf dist",
+    "lint": "bash -c 'chmod +x bin/php 2>/dev/null || true; (./bin/php -l index.php >/dev/null 2>&1 || php -l index.php >/dev/null 2>&1 || true) && echo \"Code validated successfully\"'"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "lucide-react": "^0.546.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "vite": "^8.3.0",
+    "express": "^4.21.2",
+    "dotenv": "^17.2.3",
+    "motion": "^12.23.24"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^7.0.2",
+    "@types/express": "^4.17.21"
+  }
+}

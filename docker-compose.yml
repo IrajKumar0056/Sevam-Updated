@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sevam_web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: sevam
+      DB_USER: root
+      DB_PASS: rootpassword
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    container_name: sevam_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sevam
+    ports:
+      - "3306:3306"
+    volumes:
+      - sevam_db_data:/var/lib/mysql
+      - ./database/sevam.sql:/docker-entrypoint-initdb.d/01-sevam.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  sevam_db_data:

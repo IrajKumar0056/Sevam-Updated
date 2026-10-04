@@ -1,0 +1,13 @@
+# Sevam Localhost Apache Configuration
+DirectoryIndex index.php index.html
+
+RewriteEngine On
+
+# Allow direct access to existing files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Allow extensionless PHP URLs (e.g. /login -> /login.php)
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
